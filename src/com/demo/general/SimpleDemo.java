@@ -2,6 +2,7 @@ package com.demo.general;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -20,7 +21,9 @@ public class SimpleDemo {
 		
 		// arrayToStream();
 		
-		reusingStream();
+		// reusingStream();
+		
+		findFirstDemo();
 
 	}
 
@@ -155,6 +158,38 @@ public class SimpleDemo {
 
 			System.out.println(stream.anyMatch(s -> true));    // ok
 			// System.out.println(stream.noneMatch(s -> true));    // exception
+		
+	}
+	
+	
+	public static void findFirstDemo() {
+		
+		List<String> gadgets =  
+				Arrays.asList("SmartPhone","SmartWatch","SmartTV","SmartDoor","iPhone");
+		
+		// Using orElse
+		String item = gadgets.stream() 
+				//.peek(s -> System.out.println("processing: " + s))
+				.filter(s -> s.length() > 9) 
+				//.peek(s -> System.out.println("processing now: " + s))
+				.findFirst()
+				.orElse(""); 
+		
+		System.out.println("In Java 8, first item: " + item);
+		
+		
+		
+		
+		// Using Optionals
+		 Optional<String> val = gadgets.stream()
+                 .filter(s -> s.length() > 8)
+                 .findFirst();
+		 
+		if (val.isPresent()) {
+		System.out.println("First item : " + val.get());
+		}
+
+		
 		
 	}
 	
